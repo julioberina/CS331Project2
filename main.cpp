@@ -1,5 +1,14 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
+
+// Program "Utilities"
+void fillArray(int *a, int size)
+{
+	for (int i = 0; i < size; ++i)
+		a[i] = (rand() % 90) + 10;
+}
 
 // A function to merge the two half into a sorted data.
 void Merge(int *a, int low, int high, int mid)
@@ -45,7 +54,7 @@ void Merge(int *a, int low, int high, int mid)
 
 
 	// Assign sorted data stored in temp[] to a[].
-	for (i = low; i <= high; i++)
+	for (i = low; i <= high; ++i)
 		a[i] = temp[i-low];
 }
 
@@ -67,16 +76,20 @@ void MergeSort(int *a, int low, int high)
 
 int main(int argc, char** argv)
 {
-    int array[] = {23, 42, 11, 19, 86, 73, 4};
+	srand(time(0));
+
+	int arraySize = atoi(argv[1]);
+    int array[arraySize];
+	fillArray(array, arraySize);
 
     cout << "Array unsorted:  ";
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < arraySize; ++i)
         cout << array[i] << " ";
 
-    MergeSort(array, 0, 7);
+    MergeSort(array, 0, arraySize-1);
 
     cout << endl << "Array sorted:  ";
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < arraySize; ++i)
         cout << array[i] << " ";
 
     cout << endl;

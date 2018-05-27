@@ -10,6 +10,14 @@ void fillArray(int *a, int size)
 		a[i] = (rand() % 90) + 10;
 }
 
+void printArray(int *a, int size)
+{
+	for (int i = 0; i < size; ++i)
+		cout << a[i] << " ";
+
+	cout << endl;
+}
+
 // A function to merge the two half into a sorted data.
 void Merge(int *a, int low, int high, int mid)
 {
@@ -83,16 +91,12 @@ int main(int argc, char** argv)
 	fillArray(array, arraySize);
 
     cout << "Array unsorted:  ";
-    for (int i = 0; i < arraySize; ++i)
-        cout << array[i] << " ";
+    printArray(array, arraySize);
 
     MergeSort(array, 0, arraySize-1);
 
-    cout << endl << "Array sorted:  ";
-    for (int i = 0; i < arraySize; ++i)
-        cout << array[i] << " ";
-
-    cout << endl;
+    cout << "Array sorted:  ";
+    printArray(array, arraySize);
 
     return 0;
 }

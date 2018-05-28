@@ -82,21 +82,58 @@ void MergeSort(int *a, int low, int high)
 	}
 }
 
+// iterative partition for select-kth 2
+int partitionI(int* a, const int& low, const int& high)
+{
+	int i = low - 1;
+
+	for (int j = low; j < high; ++j)
+	{
+		if (a[j] < a[high])
+		{
+			++i;
+			swap(a[i], a[j]);
+		}
+	}
+
+	swap(a[i+1], a[high]);
+	return (i + 1);
+}
+
+int selectKth1(int* a, int size, const int& k)
+{
+	MergeSort(a, 0, size-1);
+	return a[k];
+}
+
+int selectKth2(int* a, int size, const int& k)
+{
+	int low = 0, high = size-1;
+	int pivotPosition = partitionI(a, low, high);
+
+	while (k != pivotPosition)
+	{
+		if (k < pivotPosition)
+			high = pivotPosition - 1;
+		else if (k > pivotPosition)
+			low = pivotPosition + 1;
+
+		pivotPosition = partitionI(a, low, high);
+	}
+
+	return a[k];
+}
+
 int main(int argc, char** argv)
 {
-	srand(time(0));
+	// srand(time(0));
 
 	int arraySize = atoi(argv[1]);
     int array[arraySize];
+
 	fillArray(array, arraySize);
+	printArray(array, arraySize);
 
-    cout << "Array unsorted:  ";
-    printArray(array, arraySize);
-
-    MergeSort(array, 0, arraySize-1);
-
-    cout << "Array sorted:  ";
-    printArray(array, arraySize);
-
+	cout << "The kth element is " << selectKth2(array, arraySize, 7) << endl;
     return 0;
 }

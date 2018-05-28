@@ -124,13 +124,13 @@ int partitionR(int* a, const int& low, const int& high, const int& k)
 		return (i+1);
 }
 
-int selectKth1(int* a, int size, const int& k)
+int selectKth1(int* a, const int& size, const int& k)
 {
 	MergeSort(a, 0, size-1);
 	return a[k];
 }
 
-int selectKth2(int* a, int size, const int& k)
+int selectKth2(int* a, const int& size, const int& k)
 {
 	int low = 0, high = size-1;
 	int pivotPosition = partitionI(a, low, high);
@@ -153,6 +153,61 @@ int selectKth3(int* a, int size, const int& k)
 	return a[partitionR(a, 0, size-1, k)];
 }
 
+// median of medians
+int selectKth4(int *v, const int& n, const int& k) {
+    if (n == 1 && k == 0) return v[0];
+
+    int m = (n + 4) / 5;
+    int *medians = new int[m];
+    for (int i = 0; i < m; ++i)
+	{
+        if (5*i + 4 < n)
+		{
+            int *w = v + 5*i;
+            for (int j0 = 0; j0 < 3; ++j0)
+			{
+                int jmin = j0;
+                for (int j = j0 + 1; j < 5; ++j)
+                    if (w[j] < w[jmin]) jmin = j;
+
+				swap(w[j0], w[jmin]);
+            }
+
+            medians[i] = w[2];
+        }
+		else
+            medians[i] = v[5*i];
+    }
+
+    int pivot = selectKth4(medians, m, m/2);
+    delete [] medians;
+
+    for (int i = 0; i < n; ++i)
+	{
+        if (v[i] == pivot)
+		{
+            swap(v[i], v[n-1]);
+            break;
+        }
+    }
+
+    int store = 0;
+    for (int i = 0; i < n-1; ++i)
+	{
+        if (v[i] < pivot)
+			swap(v[i], v[store++]);
+    }
+
+    swap(v[store], v[n-1]);
+
+    if (store == k)
+        return pivot;
+	else if (store > k)
+        return selectKth4(v, store, k);
+    else
+        return selectKth4(v + store + 1, n - store - 1, k - store - 1);
+}
+
 int main(int argc, char** argv)
 {
 	// srand(time(0));
@@ -163,6 +218,6 @@ int main(int argc, char** argv)
 	fillArray(array, arraySize);
 	printArray(array, arraySize);
 
-	cout << "The kth element is " << selectKth3(array, arraySize, 4) << endl;
+	cout << "The kth element is " << selectKth1(array, arraySize, 5) << endl;
     return 0;
 }

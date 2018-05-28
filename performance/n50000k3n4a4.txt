@@ -1,0 +1,55 @@
+Script started on 2018-05-28 15:28:57-0700
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.087s
+user	0m0.083s
+sys	0m0.004s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.084s
+user	0m0.084s
+sys	0m0.000s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.085s
+user	0m0.081s
+sys	0m0.004s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.085s
+user	0m0.081s
+sys	0m0.004s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.086s
+user	0m0.082s
+sys	0m0.004s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.087s
+user	0m0.087s
+sys	0m0.000s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.085s
+user	0m0.085s
+sys	0m0.000s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.088s
+user	0m0.087s
+sys	0m0.000s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.088s
+user	0m0.084s
+sys	0m0.004s
+CS331Project2 $ time ./CS331Project2 50000 37499 4
+
+real	0m0.086s
+user	0m0.086s
+sys	0m0.001s
+CS331Project2 $ exit
+exit
+
+Script done on 2018-05-28 15:29:10-0700

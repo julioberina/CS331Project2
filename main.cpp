@@ -210,14 +210,33 @@ int selectKth4(int *v, const int& n, const int& k) {
 
 int main(int argc, char** argv)
 {
+	/*
+	argv[1] => size of array
+	argv[2] => k, index of item
+	argv[3] => algorithm to use
+	*/
 	// srand(time(0));
 
 	int arraySize = atoi(argv[1]);
     int array[arraySize];
 
 	fillArray(array, arraySize);
-	printArray(array, arraySize);
 
-	cout << "The kth element is " << selectKth1(array, arraySize, 5) << endl;
+	switch (atoi(argv[3]))
+	{
+		case 1:
+		selectKth1(array, arraySize, atoi(argv[2]));
+		break;
+		case 2:
+		selectKth2(array, arraySize, atoi(argv[2]));
+		break;
+		case 3:
+		selectKth3(array, arraySize, atoi(argv[2]));
+		break;
+		case 4:
+		selectKth4(array, arraySize, atoi(argv[2]));
+		break;
+	}
+
     return 0;
 }

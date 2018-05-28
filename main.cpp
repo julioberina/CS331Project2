@@ -100,6 +100,30 @@ int partitionI(int* a, const int& low, const int& high)
 	return (i + 1);
 }
 
+// recursive partition for select-kth 3
+int partitionR(int* a, const int& low, const int& high, const int& k)
+{
+	int i = low - 1;
+
+	for (int j = low; j < high; ++j)
+	{
+		if (a[j] < a[high])
+		{
+			++i;
+			swap(a[i], a[j]);
+		}
+	}
+
+	swap(a[i+1], a[high]);
+
+	if (k < (i+1))
+		return partitionR(a, low, i, k);
+	else if (k > (i+1))
+		return partitionR(a, i + 2, high, k);
+	else
+		return (i+1);
+}
+
 int selectKth1(int* a, int size, const int& k)
 {
 	MergeSort(a, 0, size-1);
@@ -124,6 +148,11 @@ int selectKth2(int* a, int size, const int& k)
 	return a[k];
 }
 
+int selectKth3(int* a, int size, const int& k)
+{
+	return a[partitionR(a, 0, size-1, k)];
+}
+
 int main(int argc, char** argv)
 {
 	// srand(time(0));
@@ -134,6 +163,6 @@ int main(int argc, char** argv)
 	fillArray(array, arraySize);
 	printArray(array, arraySize);
 
-	cout << "The kth element is " << selectKth2(array, arraySize, 7) << endl;
+	cout << "The kth element is " << selectKth3(array, arraySize, 4) << endl;
     return 0;
 }

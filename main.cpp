@@ -154,22 +154,23 @@ int selectKth3(int* a, int size, const int& k)
 }
 
 // median of medians
-int selectKth4(int *v, const int& n, const int& k) {
+int selectKth4(int *v, const int& n, const int& k) 
+{
     if (n == 1 && k == 0) return v[0];
 
     int m = (n + 4) / 5;
     int *medians = new int[m];
     for (int i = 0; i < m; ++i)
-	{
+    {
         if (5*i + 4 < n)
 		{
             int *w = v + 5*i;
             for (int j0 = 0; j0 < 3; ++j0)
-			{
+	    	{
                 int jmin = j0;
                 for (int j = j0 + 1; j < 5; ++j)
                     if (w[j] < w[jmin]) jmin = j;
-
+		
 				swap(w[j0], w[jmin]);
             }
 
@@ -183,7 +184,7 @@ int selectKth4(int *v, const int& n, const int& k) {
     delete [] medians;
 
     for (int i = 0; i < n; ++i)
-	{
+    {
         if (v[i] == pivot)
 		{
             swap(v[i], v[n-1]);
@@ -193,16 +194,16 @@ int selectKth4(int *v, const int& n, const int& k) {
 
     int store = 0;
     for (int i = 0; i < n-1; ++i)
-	{
+    {
         if (v[i] < pivot)
-			swap(v[i], v[store++]);
+	    	swap(v[i], v[store++]);
     }
 
     swap(v[store], v[n-1]);
 
     if (store == k)
         return pivot;
-	else if (store > k)
+    else if (store > k)
         return selectKth4(v, store, k);
     else
         return selectKth4(v + store + 1, n - store - 1, k - store - 1);
@@ -210,20 +211,20 @@ int selectKth4(int *v, const int& n, const int& k) {
 
 int main(int argc, char** argv)
 {
-	/*
-	argv[1] => size of array
-	argv[2] => k, index of item
-	argv[3] => algorithm to use
-	*/
-	// srand(time(0));
+    /*
+    argv[1] => size of array
+    argv[2] => k, index of item
+    argv[3] => algorithm to use
+    */
+    // srand(time(0));
 
-	int arraySize = atoi(argv[1]);
+    int arraySize = atoi(argv[1]);
     int array[arraySize];
 
-	fillArray(array, arraySize);
+    fillArray(array, arraySize);
 
-	switch (atoi(argv[3]))
-	{
+    switch (atoi(argv[3]))
+    {
 		case 1:
 		selectKth1(array, arraySize, atoi(argv[2]));
 		break;
@@ -236,7 +237,7 @@ int main(int argc, char** argv)
 		case 4:
 		selectKth4(array, arraySize, atoi(argv[2]));
 		break;
-	}
+    }
 
     return 0;
 }
